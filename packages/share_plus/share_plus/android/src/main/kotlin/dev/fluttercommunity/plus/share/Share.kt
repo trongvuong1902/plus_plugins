@@ -153,6 +153,7 @@ internal class Share(
     }
 
     private fun startActivity(intent: Intent, withResult: Boolean) {
+         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
         if (activity != null) {
             if (withResult) {
                 activity!!.startActivityForResult(intent, ShareSuccessManager.ACTIVITY_CODE)
@@ -160,7 +161,6 @@ internal class Share(
                 activity!!.startActivity(intent)
             }
         } else {
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
             if (withResult) {
                 // We need to cancel the callback to avoid deadlocking on the Dart side
                 manager.unavailable()
